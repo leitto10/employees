@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    public List<EmployeeDTO> getEmployees();
+    public List<EmployeeDTO> getEmployees(int page, int size);
 }

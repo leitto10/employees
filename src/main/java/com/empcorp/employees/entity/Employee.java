@@ -6,24 +6,14 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="employees")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer empNo;
+public class Employee extends AutoIdEntity {
+
     private LocalDate birthDate;
     private String firstName;
     private String lastName;
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private LocalDate hireDate;
-
-    public void setEmpNo(Integer empNo) {
-        this.empNo = empNo;
-    }
-
-    public Integer getEmpNo() {
-        return empNo;
-    }
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;

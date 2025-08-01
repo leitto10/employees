@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/empcore")
-public class EmpCoreAPI {
+@RequestMapping("/api/empcorp")
+public class EmpCorpAPI {
 
     @Autowired
     public EmployeeService employeeService;
@@ -22,8 +23,10 @@ public class EmpCoreAPI {
     public DepartmentService departmentService;
 
     @RequestMapping("/employees")
-    public ResponseEntity<List<EmployeeDTO>> getEmployees() {
-        List<EmployeeDTO> employees = employeeService.getEmployees();
+    public ResponseEntity<List<EmployeeDTO>> getEmployees(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "50") int size) {
+        List<EmployeeDTO> employees = employeeService.getEmployees(page, size);
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
