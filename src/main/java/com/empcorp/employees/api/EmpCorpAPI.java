@@ -4,6 +4,7 @@ import com.empcorp.employees.dto.DepartmentDTO;
 import com.empcorp.employees.dto.EmployeeDTO;
 import com.empcorp.employees.service.DepartmentService;
 import com.empcorp.employees.service.EmployeeService;
+import com.empcorp.employees.service.TitlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class EmpCorpAPI {
     public EmployeeService employeeService;
     @Autowired
     public DepartmentService departmentService;
+    @Autowired
+    public TitlesService titlesService;
 
     @RequestMapping("/employees")
     public ResponseEntity<List<EmployeeDTO>> getEmployees(
@@ -34,6 +37,12 @@ public class EmpCorpAPI {
     public ResponseEntity<List<DepartmentDTO>> getDepartments() {
         List<DepartmentDTO> departments = departmentService.getDepartments();
         return new ResponseEntity<>(departments, HttpStatus.OK);
+    }
+
+    @RequestMapping("/titles")
+    public ResponseEntity<List<String>> getDistinctTitles() {
+        List<String> titles = titlesService.getDistinctTitles();
+        return new ResponseEntity<>(titles, HttpStatus.OK);
     }
 
     public ResponseEntity<List<String>> getSalaries() {
